@@ -31,11 +31,7 @@ namespace MyInstagram.Controllers
 
         public IActionResult Index()
         {
-            LoginRegisterViewModel LRVM = new LoginRegisterViewModel();
-            LRVM.Login = GetLoginViewModel();
-            LRVM.Register = GetRegisterViewModel();
-
-            return View(LRVM);
+            return View();
         }
 
         public IActionResult About()
@@ -57,26 +53,16 @@ namespace MyInstagram.Controllers
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
 
-        private RegisterViewModel GetRegisterViewModel()
-        {
-            return new RegisterViewModel();
-        }
-
-        private LoginViewModel GetLoginViewModel()
-        {
-            return new LoginViewModel();
-        }
-
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Register(LoginRegisterViewModel model, string returnUrl = null)
+        public async Task<IActionResult> Register(RegisterViewModel model, string returnUrl = null)
         {
             ViewData["ReturnUrl"] = returnUrl;
             if (ModelState.IsValid)
             {
-                var user = new ApplicationUser { UserName = model.Register.Email, Email = model.Register.Email };
-                var result = await _userManager.CreateAsync(user, model.Register.Password);
+                var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
+                var result = await _userManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
                     _logger.LogInformation("User created a new account with password.");
