@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using MyInstagram.Entities;
 using MyInstagram.Models;
 
 namespace MyInstagram.Data
@@ -23,6 +24,6 @@ namespace MyInstagram.Data
             // Add your customizations after calling base.OnModelCreating(builder);
         }
 
-
+        public DbSet<Photo> Photo { get; set; }
     }
 }

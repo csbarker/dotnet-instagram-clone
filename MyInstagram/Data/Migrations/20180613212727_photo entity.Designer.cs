@@ -11,9 +11,10 @@ using System;
 namespace MyInstagram.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20180613212727_photo entity")]
+    partial class photoentity
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -134,8 +135,6 @@ namespace MyInstagram.Data.Migrations
                         .ValueGeneratedOnAdd();
 
                     b.Property<string>("ApplicationUserId");
-
-                    b.Property<int>("CurrentState");
 
                     b.Property<DateTime>("DateUploaded");
 

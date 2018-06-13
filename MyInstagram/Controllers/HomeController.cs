@@ -7,6 +7,8 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using MyInstagram.Data;
+using MyInstagram.Entities;
 using MyInstagram.Models;
 using MyInstagram.Models.AccountViewModels;
 
@@ -17,16 +19,19 @@ namespace MyInstagram.Controllers
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly SignInManager<ApplicationUser> _signInManager;
         private readonly ILogger<HomeController> _logger;
+        private readonly ApplicationDbContext _context;
 
         public HomeController(
             UserManager<ApplicationUser> userManager,
             SignInManager<ApplicationUser> signInManager,
-            ILogger<HomeController> logger
+            ILogger<HomeController> logger,
+            ApplicationDbContext context
         )
         {
             _userManager = userManager;
             _signInManager = signInManager;
             _logger = logger;
+            _context = context;
         }
 
         public IActionResult Index()
